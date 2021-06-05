@@ -4,9 +4,11 @@ import 'package:eago_app/presentation/routes/routes.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:logging/logging.dart';
 
-void main() {
+main() async {
+  await GetStorage.init();
   Bloc.observer = SimpleBlocObserver();
   runApp(MyApp());
 }
