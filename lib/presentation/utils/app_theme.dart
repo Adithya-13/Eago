@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const Color scaffoldColor = Color(0xfff5f5f5);
   static const Color deepBlue = Color(0xff3f3a58);
+  static const Color lightPurple = Color(0xff918ac8);
   static const Color grey = Color(0xffa3a1ae);
   static const Color deepOrange = Color(0xfffa543b);
-
 
   static const TextStyle headline1 = TextStyle(
     fontSize: 28,
@@ -37,4 +37,14 @@ class AppTheme {
     fontWeight: FontWeight.w500,
   );
 
+  static List<BoxShadow> getShadow(Color color) {
+    return [
+      BoxShadow(
+        color: color.withOpacity(0.3),
+        offset: Offset(0, 6),
+        blurRadius: 10,
+        spreadRadius: 2,
+      ),
+    ];
+  }
 }
