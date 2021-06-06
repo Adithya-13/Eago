@@ -8,7 +8,7 @@ class PageRouter {
   PageRouter() : routeObserver = RouteObserver<PageRoute>();
 
   Route<dynamic> getRoute(RouteSettings settings){
-    final args = settings.arguments as ArgumentBundle;
+    final args = settings.arguments;
     switch(settings.name){
       case PagePath.splash: return _buildRoute(settings, SplashPage());
       case PagePath.onBoard: return _buildRoute(settings, OnBoardPage());

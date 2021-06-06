@@ -28,7 +28,8 @@ class _OnBoardPageState extends State<OnBoardPage> {
     setState(() {
       currentContent++;
     });
-    onBoardController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    onBoardController.nextPage(
+        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   void _backContent() {
@@ -39,7 +40,8 @@ class _OnBoardPageState extends State<OnBoardPage> {
     setState(() {
       currentContent--;
     });
-    onBoardController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    onBoardController.previousPage(
+        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   void _goToDashboard() {
@@ -50,7 +52,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.lightPurple,
+      backgroundColor: AppTheme.deepOrange,
       body: Column(
         children: [
           _onBoardContent(),
@@ -69,7 +71,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.vertical(bottom: Radius.circular(40)),
+                    BorderRadius.vertical(bottom: Radius.circular(40)),
                 color: Colors.white,
               ),
               padding: EdgeInsets.all(20),
@@ -79,7 +81,10 @@ class _OnBoardPageState extends State<OnBoardPage> {
                   children: [
                     Align(
                       alignment: Alignment.topRight,
-                      child: RippleButton(onTap: _goToDashboard, text: 'Skip',),
+                      child: RippleButton(
+                        onTap: _goToDashboard,
+                        text: 'Skip',
+                      ),
                     ),
                     SizedBox(height: 20),
                     _carouselOnBoard(),
@@ -133,29 +138,32 @@ class _OnBoardPageState extends State<OnBoardPage> {
       child: CarouselSlider(
         items: contentList
             .map((items) => Column(
-          children: [
-            Flexible(
-              child: SvgPicture.asset(
-                items.illustration,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(items.title,
-                style: AppTheme.headline1),
-            SizedBox(height: 20),
-            Text(
-              items.description,
-              style: AppTheme.text2.moreLineSpace,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ))
+                  children: [
+                    Flexible(
+                      child: SvgPicture.asset(
+                        items.illustration,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      items.title,
+                      style: AppTheme.headline1,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      items.description,
+                      style: AppTheme.text1.moreLineSpace,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ))
             .toList(),
         carouselController: onBoardController,
         options: CarouselOptions(
           viewportFraction: 1,
           enableInfiniteScroll: false,
-          aspectRatio: 4/3,
+          aspectRatio: 4 / 3,
           scrollPhysics: BouncingScrollPhysics(),
           initialPage: currentContent,
           onPageChanged: (index, reason) {
@@ -178,50 +186,28 @@ class _OnBoardPageState extends State<OnBoardPage> {
               onPressed: _backContent,
               child: Text('BACK',
                   style: currentContent == 0
-                      ? AppTheme.text2.light
-                      : AppTheme.text2)),
+                      ? AppTheme.text1.withWhite.light
+                      : AppTheme.text1.withWhite)),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 10,
-                width: 10,
-                decoration: BoxDecoration(
-                  color: currentContent == 0
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              SizedBox(width: 8),
-              Container(
-                height: 10,
-                width: 10,
-                decoration: BoxDecoration(
-                  color: currentContent == 1
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              SizedBox(width: 8),
-              Container(
-                height: 10,
-                width: 10,
-                decoration: BoxDecoration(
-                  color: currentContent == 2
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              SizedBox(width: 8),
-            ],
+            children: contentList
+                .map((e) => Container(
+                      height: 10,
+                      width: 10,
+                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                        color: currentContent == e.id
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.5),
+                        shape: BoxShape.circle,
+                      ),
+                    ))
+                .toList(),
           ),
           TextButton(
               onPressed: _nextContent,
-              child: Text(currentContent == 2 ? 'FINISH' : 'NEXT',
-                  style: AppTheme.text2)),
+              child: Text(currentContent == 5 ? 'FINISH' : 'NEXT',
+                  style: AppTheme.text1.withWhite)),
         ],
       ),
     );
