@@ -1,6 +1,7 @@
 import 'package:eago_app/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -8,7 +9,8 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
+  final List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses","Hand bag", "Jewellery", "Footwear", "Dresses","Hand bag", "Jewellery", "Footwear", "Dresses",];
+  final categoryScrollController = ItemScrollController();
   int selectedCategory = 0;
 
   @override
@@ -93,7 +95,10 @@ class _DashboardPageState extends State<DashboardPage> {
       margin: EdgeInsets.symmetric(vertical: 20),
       child: StatefulBuilder(
         builder: (context, categorySetState) {
-          return ListView.builder(
+          return ScrollablePositionedList.builder(
+            initialAlignment: 0,
+            initialScrollIndex: selectedCategory,
+            itemScrollController: categoryScrollController,
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
             itemBuilder: (context, index) => buildCategory(index, categorySetState),
@@ -108,6 +113,13 @@ class _DashboardPageState extends State<DashboardPage> {
     return GestureDetector(
       onTap: () {
         categorySetState(() {
+          categoryScrollController.scrollTo(
+            index: index,
+            alignment: 0,
+            duration: Duration(milliseconds: 500),
+            opacityAnimationWeights: [20, 20, 60],
+            curve: Curves.easeInOutCubic,
+          );
           selectedCategory = index;
         });
       },
