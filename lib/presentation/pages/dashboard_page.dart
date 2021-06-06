@@ -8,6 +8,9 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  final List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
+  int selectedCategory = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               _header(),
               _search(),
+              _categories(),
             ],
           ),
         ),
@@ -79,6 +83,51 @@ class _DashboardPageState extends State<DashboardPage> {
             child: SvgPicture.asset(Resources.setting, width: 20,),
           ),
         ],
+      ),
+    );
+  }
+
+  _categories(){
+    return Container(
+      height: 24,
+      margin: EdgeInsets.symmetric(vertical: 20),
+      child: StatefulBuilder(
+        builder: (context, categorySetState) {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (context, index) => buildCategory(index, categorySetState),
+          );
+        }
+      ),
+    );
+  }
+
+
+  Widget buildCategory(int index, Function(void Function()) categorySetState) {
+    return GestureDetector(
+      onTap: () {
+        categorySetState(() {
+          selectedCategory = index;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              categories[index],
+              style: selectedCategory == index ? AppTheme.text1.withDeepBlue : AppTheme.text1,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 20 / 4), //top padding 5
+              height: 2,
+              width: 30,
+              color: selectedCategory == index ? AppTheme.deepBlue : Colors.transparent,
+            )
+          ],
+        ),
       ),
     );
   }
