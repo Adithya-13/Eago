@@ -1,4 +1,5 @@
 import 'package:eago_app/data/exceptions/api_exception.dart';
+import 'package:eago_app/data/repositories/repositories.dart';
 import 'package:eago_app/logic/blocs/blocs.dart';
 import 'package:eago_app/presentation/routes/routes.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
@@ -10,7 +11,25 @@ import 'package:logging/logging.dart';
 main() async {
   await GetStorage.init();
   Bloc.observer = SimpleBlocObserver();
-  runApp(MyApp());
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<ProductRepository>(
+          create: (context) => ProductRepository(),
+        )
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<ProductBloc>(
+            create: (context) => ProductBloc(
+              productRepository: context.read<ProductRepository>(),
+            ),
+          ),
+        ],
+        child: MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
