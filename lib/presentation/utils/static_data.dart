@@ -53,4 +53,19 @@ class StaticData {
             description:
                 'Aliquam commodo mattis massa id tristique. Sed euismod quam enim, vulputate placerat mauris ornare nec.'),
       ];
+
+  static List<String> getCategoryList() => [
+    "Hand bag",
+    "Jewellery",
+    "Footwear",
+    "Dresses",
+    "Hand bag",
+    "Jewellery",
+    "Footwear",
+    "Dresses",
+    "Hand bag",
+    "Jewellery",
+    "Footwear",
+    "Dresses",
+  ];
 }
