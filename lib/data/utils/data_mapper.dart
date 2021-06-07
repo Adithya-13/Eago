@@ -14,6 +14,7 @@ extension Mapper on List<Product> {
           seller: item.seller,
           rating: item.rating,
           otherProductImages: item.otherProductImages,
+          listColor: item.listColor,
         )).toList());
   }
 }

@@ -18,6 +18,7 @@ class ProductItemEntity extends BaseEntity {
   final int price;
   final double rating;
   final List<String> otherProductImages;
+  final List<Color> listColor;
 
   ProductItemEntity({
     int? id,
@@ -29,6 +30,7 @@ class ProductItemEntity extends BaseEntity {
     String? lessDescription,
     double? rating,
     List<String>? otherProductImages,
+    List<Color>? listColor,
   })  : id = id ?? 0,
         image = image ?? Resources.bag1,
         title = title ?? '-',
@@ -37,5 +39,6 @@ class ProductItemEntity extends BaseEntity {
         seller = seller ?? '-',
         lessDescription = lessDescription ?? '-',
         rating = rating ?? 0.0,
-        otherProductImages = otherProductImages ?? [];
+        otherProductImages = otherProductImages ?? [],
+        listColor = listColor ?? [];
 }

@@ -7,14 +7,24 @@ class PageRouter {
 
   PageRouter() : routeObserver = RouteObserver<PageRoute>();
 
-  Route<dynamic> getRoute(RouteSettings settings){
+  Route<dynamic> getRoute(RouteSettings settings) {
     final args = settings.arguments;
-    switch(settings.name){
-      case PagePath.splash: return _buildRoute(settings, SplashPage());
-      case PagePath.onBoard: return _buildRoute(settings, OnBoardPage());
-      case PagePath.dashboard: return _buildRoute(settings, DashboardPage());
-      case PagePath.detail: return _buildRoute(settings, DetailPage());
-      default: return _errorRoute();
+    switch (settings.name) {
+      case PagePath.splash:
+        return _buildRoute(settings, SplashPage());
+      case PagePath.onBoard:
+        return _buildRoute(settings, OnBoardPage());
+      case PagePath.dashboard:
+        return _buildRoute(settings, DashboardPage());
+      case PagePath.detail:
+        return _buildRoute(
+          settings,
+          DetailPage(
+            bundle: args as ArgumentBundle,
+          ),
+        );
+      default:
+        return _errorRoute();
     }
   }
 

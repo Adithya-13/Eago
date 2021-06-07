@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Product {
   final int id;
   final String title;
@@ -8,6 +10,7 @@ class Product {
   final int price;
   final double rating;
   final List<String> otherProductImages;
+  final List<Color> listColor;
 
   Product({
     required this.id,
@@ -19,5 +22,6 @@ class Product {
     required this.price,
     required this.rating,
     required this.otherProductImages,
+    required this.listColor,
   });
 }
