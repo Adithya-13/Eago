@@ -123,6 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget buildCategory(int index, Function(void Function()) categorySetState) {
     return GestureDetector(
       onTap: () {
+        context.read<ProductBloc>().add(ProductFetched());
         categorySetState(() {
           categoryScrollController.scrollTo(
             index: index,
@@ -169,7 +170,7 @@ class _DashboardPageState extends State<DashboardPage> {
           } else if (state is ProductFailure) {
             return Container();
           } else if (state is ProductSuccess) {
-            final productList = state.entity.productList;
+            final productList = state.entity.productList.shuffleList;
             return ListView.builder(
               shrinkWrap: true,
               itemCount: productList.length,
@@ -259,7 +260,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           text: 'by ',
                                         ),
                                         TextSpan(
-                                          text: 'Seto',
+                                          text: productItem.seller,
                                           style: AppTheme.text2.bold,
                                         ),
                                       ],
@@ -269,7 +270,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               SizedBox(height: 6),
                               Text(
-                                'Lorem Ipsum Dolor Sit Amet Lorem Ipsum',
+                                productItem.lessDescription,
                                 style: AppTheme.text2,
                               ),
                               SizedBox(height: 6),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
@@ -47,5 +49,25 @@ extension Ripple on Widget {
         child: this,
       ),
     );
+  }
+}
+
+extension Shuffle<T> on List<T> {
+  List<T> get shuffleList {
+    var items = this;
+    var random = new Random();
+
+    // Go through all elements.
+    for (var i = items.length - 1; i > 0; i--) {
+
+      // Pick a pseudorandom number according to the list length
+      var n = random.nextInt(i + 1);
+
+      var temp = items[i];
+      items[i] = items[n];
+      items[n] = temp;
+    }
+
+    return items;
   }
 }
