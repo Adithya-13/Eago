@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:eago_app/logic/blocs/blocs.dart';
 import 'package:eago_app/presentation/routes/routes.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
@@ -176,140 +177,147 @@ class _DashboardPageState extends State<DashboardPage> {
           } else if (state is ProductSuccess) {
             if (state.entity.productList.isEmpty) return EmptyWidget();
             final productList = state.entity.productList.shuffleList;
-            return ListView.builder(
+            return LiveList.options(
+              options: Helper.options,
               shrinkWrap: true,
               itemCount: productList.length,
               physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
+              itemBuilder: (context, index, animation) {
                 final productItem = productList[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      PagePath.detail,
-                      arguments: ArgumentBundle(
-                        id: productItem.id,
-                        extras: {
-                          Keys.productItem: productItem,
-                        },
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.width * 0.44,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.deepBlue.withOpacity(0.1),
-                          offset: Offset(0, 12),
-                          blurRadius: 20,
-                          spreadRadius: 4,
+                return FadeTransition(
+                  opacity: Tween<double>(
+                    begin: 0,
+                    end: 1,
+                  ).animate(animation),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        PagePath.detail,
+                        arguments: ArgumentBundle(
+                          id: productItem.id,
+                          extras: {
+                            Keys.productItem: productItem,
+                          },
                         ),
-                      ],
-                    ),
-                    padding: EdgeInsets.all(12),
-                    margin: EdgeInsets.symmetric(vertical: 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 3 / 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppTheme.scaffoldColor,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Hero(
-                                tag: 'image ${productItem.id}',
-                                child:
-                                    Image.asset(productItem.image),
+                      );
+                    },
+                    child: Container(
+                      height: MediaQuery.of(context).size.width * 0.44,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.deepBlue.withOpacity(0.1),
+                            offset: Offset(0, 12),
+                            blurRadius: 20,
+                            spreadRadius: 4,
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.all(12),
+                      margin: EdgeInsets.symmetric(vertical: 12),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 3 / 4,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppTheme.scaffoldColor,
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Hero(
+                                  tag: 'image ${productItem.id}',
+                                  child:
+                                      Image.asset(productItem.image),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Text(
-                                      productItem.title,
-                                      style: AppTheme.text1.withDeepBlue,
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text.rich(
-                                      TextSpan(
-                                        style: AppTheme.text2,
-                                        children: [
-                                          TextSpan(
-                                            text: 'by ',
-                                          ),
-                                          TextSpan(
-                                            text: productItem.seller,
-                                            style: AppTheme.text2.bold,
-                                          ),
-                                        ],
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        productItem.title,
+                                        style: AppTheme.text1.withDeepBlue,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 6),
-                                Text(
-                                  productItem.lessDescription,
-                                  style: AppTheme.text2,
-                                ),
-                                SizedBox(height: 6),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text.rich(
-                                      TextSpan(
-                                        style: AppTheme.headline3,
-                                        children: [
-                                          TextSpan(
-                                            text: '\$${productItem.price}.',
-                                          ),
-                                          TextSpan(
-                                            text: '00',
-                                            style: AppTheme.text2.withDeepBlue,
-                                          ),
-                                        ],
+                                      SizedBox(height: 4),
+                                      Text.rich(
+                                        TextSpan(
+                                          style: AppTheme.text2,
+                                          children: [
+                                            TextSpan(
+                                              text: 'by ',
+                                            ),
+                                            TextSpan(
+                                              text: productItem.seller,
+                                              style: AppTheme.text2.bold,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 12, horizontal: 24),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(32),
-                                        color: AppTheme.deepBlue,
-                                        boxShadow: AppTheme.getShadow(
-                                            AppTheme.deepBlue),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    productItem.lessDescription,
+                                    style: AppTheme.text2,
+                                  ),
+                                  SizedBox(height: 6),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text.rich(
+                                        TextSpan(
+                                          style: AppTheme.headline3,
+                                          children: [
+                                            TextSpan(
+                                              text: '\$${productItem.price}.',
+                                            ),
+                                            TextSpan(
+                                              text: '00',
+                                              style: AppTheme.text2.withDeepBlue,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      child: Text(
-                                        'Buy',
-                                        style: AppTheme.text2.withWhite,
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 12, horizontal: 24),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(32),
+                                          color: AppTheme.deepBlue,
+                                          boxShadow: AppTheme.getShadow(
+                                              AppTheme.deepBlue),
+                                        ),
+                                        child: Text(
+                                          'Buy',
+                                          style: AppTheme.text2.withWhite,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
