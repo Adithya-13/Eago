@@ -18,6 +18,7 @@ class _DetailPageState extends State<DetailPage> {
   late ProductItemEntity _productItem = widget.bundle.extras[Keys.productItem];
   int selectedColor = 0;
   int countTotal = 1;
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +69,16 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
             child: CircleAvatar(
               radius: 24,
               backgroundColor: Colors.white,
               child: Icon(
-                Icons.favorite_border_rounded,
+                isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
                 color: Colors.redAccent,
               ),
             ),

@@ -221,43 +221,13 @@ class _DashboardPageState extends State<DashboardPage> {
                               color: AppTheme.scaffoldColor,
                               borderRadius: BorderRadius.circular(24),
                             ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 8,
-                                  right: 8,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: CircleAvatar(
-                                      radius: 16,
-                                      backgroundColor: Colors.white,
-                                      child: Icon(
-                                        Icons.favorite_border_rounded,
-                                        color: Colors.redAccent,
-                                        size: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned.fill(
-                                  child: Column(
-                                    children: [
-                                      Spacer(),
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Hero(
-                                            tag: 'image ${productItem.id}',
-                                            child:
-                                                Image.asset(productItem.image),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Hero(
+                                tag: 'image ${productItem.id}',
+                                child:
+                                    Image.asset(productItem.image),
+                              ),
                             ),
                           ),
                         ),
