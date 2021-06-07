@@ -38,6 +38,7 @@ dependencies:
   auto_size_text: ^3.0.0-nullsafety.0
   scrollable_positioned_list: ^0.2.0-nullsafety.0
   cached_network_image: ^3.0.0
+  lottie: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +60,7 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/svgs/
+    - assets/jsons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

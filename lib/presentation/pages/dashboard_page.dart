@@ -1,5 +1,6 @@
 import 'package:eago_app/logic/blocs/blocs.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
+import 'package:eago_app/presentation/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,10 +167,11 @@ class _DashboardPageState extends State<DashboardPage> {
       child: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProductLoad) {
-            return Container();
+            return LoadingWidget();
           } else if (state is ProductFailure) {
-            return Container();
+            return FailureWidget(message: state.e,);
           } else if (state is ProductSuccess) {
+            if(state.entity.productList.isEmpty) return EmptyWidget();
             final productList = state.entity.productList.shuffleList;
             return ListView.builder(
               shrinkWrap: true,

@@ -1,13 +1,14 @@
 class Resources {
-  static const String _baseImages = 'assets/images';
+  static const String _baseImage = 'assets/images';
   static const String _baseSvg = 'assets/svgs';
+  static const String _baseJson = 'assets/jsons';
 
-  static const String bag1 = '$_baseImages/bag_1.png';
-  static const String bag2 = '$_baseImages/bag_2.png';
-  static const String bag3 = '$_baseImages/bag_3.png';
-  static const String bag4 = '$_baseImages/bag_4.png';
-  static const String bag5 = '$_baseImages/bag_5.png';
-  static const String bag6 = '$_baseImages/bag_6.png';
+  static const String bag1 = '$_baseImage/bag_1.png';
+  static const String bag2 = '$_baseImage/bag_2.png';
+  static const String bag3 = '$_baseImage/bag_3.png';
+  static const String bag4 = '$_baseImage/bag_4.png';
+  static const String bag5 = '$_baseImage/bag_5.png';
+  static const String bag6 = '$_baseImage/bag_6.png';
 
   static const String icon_launcher = '$_baseSvg/ic_launcher_splash.svg';
   static const String setting = '$_baseSvg/settings.svg';
@@ -17,6 +18,10 @@ class Resources {
   static const String onBoard4 = '$_baseSvg/on_board_4.svg';
   static const String onBoard5 = '$_baseSvg/on_board_5.svg';
   static const String onBoard6 = '$_baseSvg/on_board_6.svg';
+
+  static const String loading = '$_baseJson/loading.json';
+  static const String error = '$_baseJson/error.json';
+  static const String empty = '$_baseJson/empty.json';
 }
 
 class Keys {
