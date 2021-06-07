@@ -1,4 +1,3 @@
-
 import 'package:eago_app/presentation/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -30,7 +29,6 @@ class EmptyWidget extends StatelessWidget {
 }
 
 class FailureWidget extends StatelessWidget {
-
   final String message;
 
   const FailureWidget({Key? key, required this.message}) : super(key: key);
@@ -49,6 +47,23 @@ class FailureWidget extends StatelessWidget {
             SizedBox(height: 20),
             Text(message, style: AppTheme.text1),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class SuccessWidget extends StatelessWidget {
+  const SuccessWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: Center(
+        child: LottieBuilder.asset(
+          Resources.success,
+          repeat: false,
         ),
       ),
     );

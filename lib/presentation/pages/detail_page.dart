@@ -1,6 +1,7 @@
 import 'package:eago_app/data/entities/entities.dart';
 import 'package:eago_app/presentation/routes/routes.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
+import 'package:eago_app/presentation/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -299,7 +300,7 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
             GestureDetector(
-              onTap: (){},
+              onTap: () => _buyProduct(),
               child: Container(
                 padding: EdgeInsets.all(24),
                 decoration: BoxDecoration(
@@ -315,6 +316,46 @@ class _DetailPageState extends State<DetailPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  _buyProduct() {
+    showDialog<bool>(
+      context: context,
+      builder: (context) => FilterWrapper(
+        blurAmount: 5,
+        child: AlertDialog(
+          title: Text("Success Buy ${_productItem.title}!", style: AppTheme.headline3, textAlign: TextAlign.center,),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SuccessWidget(),
+              SizedBox(height: 20),
+              Text(
+                'Thank you for order the ${_productItem.title}!',
+                style: AppTheme.text1,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Close',
+                style: AppTheme.text1.withDeepBlue,
+              ),
+            ),
+          ],
+          insetPadding:
+          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          clipBehavior: Clip.antiAlias,
         ),
       ),
     );

@@ -22,6 +22,7 @@ class Resources {
   static const String loading = '$_baseJson/loading.json';
   static const String error = '$_baseJson/error.json';
   static const String empty = '$_baseJson/empty.json';
+  static const String success = '$_baseJson/success.json';
 }
 
 class Keys {
