@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class RippleButton extends StatelessWidget {
   final String text;
+  final Color color;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
   final VoidCallback onTap;
@@ -15,6 +16,7 @@ class RippleButton extends StatelessWidget {
     required this.onTap,
     this.prefixWidget,
     this.suffixWidget,
+    this.color = AppTheme.deepOrange,
   }) : super(key: key);
 
   @override

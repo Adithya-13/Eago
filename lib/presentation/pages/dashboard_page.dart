@@ -1,5 +1,6 @@
 import 'package:eago_app/logic/blocs/blocs.dart';
 import 'package:eago_app/presentation/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -176,6 +177,7 @@ class _DashboardPageState extends State<DashboardPage> {
               itemBuilder: (context, index) {
                 final productItem = productList[index];
                 return Container(
+                  height: MediaQuery.of(context).size.width * 0.44,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32),
                     color: Colors.white,
@@ -191,55 +193,122 @@ class _DashboardPageState extends State<DashboardPage> {
                   padding: EdgeInsets.all(12),
                   margin: EdgeInsets.symmetric(vertical: 12),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.width * 0.4,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: AppTheme.scaffoldColor,
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        child: AspectRatio(
-                          aspectRatio: 3 / 4,
-                          child: Image.asset(productItem.image),
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                              Text(
-                                productItem.title,
-                                style: AppTheme.text1.withDeepBlue,
+                      AspectRatio(
+                        aspectRatio: 3 / 4,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.scaffoldColor,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: GestureDetector(
+                                  onTap: (){},
+                                  child: CircleAvatar(
+                                    radius: 16,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(Icons.favorite_border_rounded, color: Colors.redAccent,size: 16,),
+                                  ),
+                                ),
                               ),
-                              SizedBox(height: 4),
-                              Text.rich(
-                                TextSpan(
-                                  style: AppTheme.text2,
+                              Positioned.fill(
+                                child: Column(
                                   children: [
-                                    TextSpan(
-                                      text: 'by ',
-                                    ),
-                                    TextSpan(
-                                      text: 'Seto',
-                                      style: AppTheme.text2.bold,
+                                    Spacer(),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16),
+                                        child: Image.asset(productItem.image),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 6),
-                              Center(
-                                child: Text(
-                                  'Lorem Ipsum Dolor Sit Amet Lorem Ipsum',
-                                  style: AppTheme.text2,
-                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    productItem.title,
+                                    style: AppTheme.text1.withDeepBlue,
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text.rich(
+                                    TextSpan(
+                                      style: AppTheme.text2,
+                                      children: [
+                                        TextSpan(
+                                          text: 'by ',
+                                        ),
+                                        TextSpan(
+                                          text: 'Seto',
+                                          style: AppTheme.text2.bold,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 6),
-                              Row(),
+                              Text(
+                                'Lorem Ipsum Dolor Sit Amet Lorem Ipsum',
+                                style: AppTheme.text2,
+                              ),
+                              SizedBox(height: 6),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text.rich(
+                                    TextSpan(
+                                      style: AppTheme.headline3,
+                                      children: [
+                                        TextSpan(
+                                          text: '\$${productItem.price}.',
+                                        ),
+                                        TextSpan(
+                                          text: '00',
+                                          style: AppTheme.text2.withDeepBlue,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 24),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(32),
+                                      color: AppTheme.deepBlue,
+                                      boxShadow:
+                                          AppTheme.getShadow(AppTheme.deepBlue),
+                                    ),
+                                    child: Text(
+                                      'Buy',
+                                      style: AppTheme.text2.withWhite,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
+                          ),
                         ),
                       ),
                     ],
