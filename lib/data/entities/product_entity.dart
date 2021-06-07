@@ -10,26 +10,32 @@ class ProductEntity extends BaseEntity {
 
 class ProductItemEntity extends BaseEntity {
   final int id;
-  final String image;
   final String title;
+  final String seller;
+  final String image;
+  final String lessDescription;
   final String description;
   final int price;
-  final int size;
-  final Color color;
+  final double rating;
+  final List<String> otherProductImages;
 
   ProductItemEntity({
     int? id,
     String? image,
     String? title,
     int? price,
-    int? size,
     String? description,
-    Color? color,
+    String? seller,
+    String? lessDescription,
+    double? rating,
+    List<String>? otherProductImages,
   })  : id = id ?? 0,
         image = image ?? Resources.bag1,
         title = title ?? '-',
         price = price ?? 0,
-        size = size ?? 0,
         description = description ?? '-',
-        color = color ?? Colors.white;
+        seller = seller ?? '-',
+        lessDescription = lessDescription ?? '-',
+        rating = rating ?? 0.0,
+        otherProductImages = otherProductImages ?? [];
 }

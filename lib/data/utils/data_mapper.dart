@@ -8,10 +8,12 @@ extension Mapper on List<Product> {
           id: item.id,
           title: item.title,
           description: item.description,
+          lessDescription: item.lessDescription,
           price: item.price,
-          size: item.size,
           image: item.image,
-          color: item.color,
+          seller: item.seller,
+          rating: item.rating,
+          otherProductImages: item.otherProductImages,
         )).toList());
   }
 }
