@@ -184,7 +184,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
         children: [
           TextButton(
               onPressed: _backContent,
-              child: Text('BACK',
+              child: Text('Back',
                   style: currentContent == 0
                       ? AppTheme.text1.withWhite.light
                       : AppTheme.text1.withWhite)),
@@ -206,7 +206,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
           ),
           TextButton(
               onPressed: _nextContent,
-              child: Text(currentContent == 5 ? 'FINISH' : 'NEXT',
+              child: Text(currentContent == 5 ? 'Finish' : 'Next',
                   style: AppTheme.text1.withWhite)),
         ],
       ),

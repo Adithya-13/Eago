@@ -11,6 +11,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:logging/logging.dart';
 
 main() async {
+  debugPrint = (String? message, {int? wrapWidth}) {};
   await GetStorage.init();
   BlocOverrides.runZoned(
     () => runApp(
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
     Logger.root.onRecord.listen((record) {
       dynamic e = record.error;
       String m = e is APIException ? e.message : e.toString();
-      print(
+      debugPrint(
           '${record.loggerName}: ${record.level.name}: ${record.message} ${m != 'null' ? m : ''}');
     });
     Logger.root.info("Logger initialized.");

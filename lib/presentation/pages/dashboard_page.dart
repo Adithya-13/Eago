@@ -6,7 +6,6 @@ import 'package:eago_app/presentation/utils/utils.dart';
 import 'package:eago_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -102,24 +101,25 @@ class _DashboardPageState extends State<DashboardPage> {
                     Icons.search_outlined,
                     color: AppTheme.deepBlue,
                   ),
+                  suffixIcon: searchController.text.isNotEmpty
+                    ? GestureDetector(
+                      child: Icon(
+                          Icons.close_rounded,
+                          color: AppTheme.deepBlue,
+                        ),
+                      onTap: () {
+                        setState(() {
+                          searchController.clear();
+                        });
+                      },
+                    )
+                    : null,
                   hintText: 'Search',
                   hintStyle: AppTheme.text1),
               style: AppTheme.text1.withDeepBlue,
               onChanged: (value) {
                 _searchAlgorithm(value);
               },
-            ),
-          ),
-          SizedBox(width: 12),
-          Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
-            ),
-            child: SvgPicture.asset(
-              Resources.setting,
-              width: 20,
             ),
           ),
         ],
@@ -172,7 +172,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   : AppTheme.text1,
             ),
             Container(
-              margin: EdgeInsets.only(top: 20 / 4), //top padding 5
+              margin: EdgeInsets.only(top: 20 / 4),
               height: 2,
               width: 30,
               color: selectedCategory == index
