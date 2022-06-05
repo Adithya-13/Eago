@@ -78,7 +78,9 @@ class _DetailPageState extends State<DetailPage> {
               radius: 24,
               backgroundColor: Colors.white,
               child: Icon(
-                isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                isFavorite
+                    ? Icons.favorite_rounded
+                    : Icons.favorite_border_rounded,
                 color: Colors.redAccent,
               ),
             ),
@@ -295,7 +297,7 @@ class _DetailPageState extends State<DetailPage> {
                 style: AppTheme.headline2,
                 children: [
                   TextSpan(
-                    text: '\$${_productItem.price}.',
+                    text: '\$${_productItem.price * countTotal}.',
                   ),
                   TextSpan(
                     text: '00',
@@ -311,8 +313,7 @@ class _DetailPageState extends State<DetailPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32),
                   color: AppTheme.deepOrange,
-                  boxShadow: AppTheme.getShadow(
-                      AppTheme.deepOrange),
+                  boxShadow: AppTheme.getShadow(AppTheme.deepOrange),
                 ),
                 child: Text(
                   'Buy now',
@@ -332,7 +333,11 @@ class _DetailPageState extends State<DetailPage> {
       builder: (context) => FilterWrapper(
         blurAmount: 5,
         child: AlertDialog(
-          title: Text("Success Buy ${_productItem.title}!", style: AppTheme.headline3, textAlign: TextAlign.center,),
+          title: Text(
+            "Success Buy ${_productItem.title}!",
+            style: AppTheme.headline3,
+            textAlign: TextAlign.center,
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -356,7 +361,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ],
           insetPadding:
-          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
