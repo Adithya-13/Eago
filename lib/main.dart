@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Eago',
         theme: ThemeData(
+          useMaterial3: true,
           primarySwatch: Colors.deepOrange,
           scaffoldBackgroundColor: AppTheme.scaffoldColor,
           fontFamily: !Platform.isIOS ? 'Gotham' : null,
