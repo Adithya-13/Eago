@@ -102,18 +102,18 @@ class _DashboardPageState extends State<DashboardPage> {
                     color: AppTheme.deepBlue,
                   ),
                   suffixIcon: searchController.text.isNotEmpty
-                    ? GestureDetector(
-                      child: Icon(
-                          Icons.close_rounded,
-                          color: AppTheme.deepBlue,
-                        ),
-                      onTap: () {
-                        setState(() {
-                          searchController.clear();
-                        });
-                      },
-                    )
-                    : null,
+                      ? GestureDetector(
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: AppTheme.deepBlue,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              searchController.clear();
+                            });
+                          },
+                        )
+                      : null,
                   hintText: 'Search',
                   hintStyle: AppTheme.text1),
               style: AppTheme.text1.withDeepBlue,
@@ -238,7 +238,7 @@ class _DashboardPageState extends State<DashboardPage> {
               );
             },
             child: Container(
-              height: MediaQuery.of(context).size.width * 0.44,
+              height: MediaQuery.of(context).size.width * 0.48,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(32),
                 color: Colors.white,
@@ -254,7 +254,6 @@ class _DashboardPageState extends State<DashboardPage> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.symmetric(vertical: 12),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   AspectRatio(
                     aspectRatio: 3 / 4,
@@ -279,70 +278,84 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                productItem.title,
-                                style: AppTheme.text1.withDeepBlue,
-                              ),
-                              SizedBox(height: 4),
-                              Text.rich(
-                                TextSpan(
-                                  style: AppTheme.text2,
-                                  children: [
-                                    TextSpan(
-                                      text: 'by ',
-                                    ),
-                                    TextSpan(
-                                      text: productItem.seller,
-                                      style: AppTheme.text2.bold,
-                                    ),
-                                  ],
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  productItem.title,
+                                  style: AppTheme.text1.withDeepBlue,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                            ],
+                                SizedBox(height: 4),
+                                Expanded(
+                                  child: Text.rich(
+                                    TextSpan(
+                                      style: AppTheme.text2,
+                                      children: [
+                                        TextSpan(
+                                          text: 'by ',
+                                        ),
+                                        TextSpan(
+                                          text: productItem.seller,
+                                          style: AppTheme.text2.bold,
+                                        ),
+                                      ],
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(height: 6),
-                          Text(
-                            productItem.lessDescription,
-                            style: AppTheme.text2,
+                          Flexible(
+                            child: Text(
+                              productItem.lessDescription,
+                              style: AppTheme.text2,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           SizedBox(height: 6),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text.rich(
-                                TextSpan(
-                                  style: AppTheme.headline3,
-                                  children: [
-                                    TextSpan(
-                                      text: '\$${productItem.price}.',
-                                    ),
-                                    TextSpan(
-                                      text: '00',
-                                      style: AppTheme.text2.withDeepBlue,
-                                    ),
-                                  ],
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text.rich(
+                                  TextSpan(
+                                    style: AppTheme.headline3,
+                                    children: [
+                                      TextSpan(
+                                        text: '\$${productItem.price}.',
+                                      ),
+                                      TextSpan(
+                                        text: '00',
+                                        style: AppTheme.text2.withDeepBlue,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 24),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(32),
-                                  color: AppTheme.deepBlue,
-                                  boxShadow:
-                                      AppTheme.getShadow(AppTheme.deepBlue),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 24),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(32),
+                                    color: AppTheme.deepBlue,
+                                    boxShadow:
+                                        AppTheme.getShadow(AppTheme.deepBlue),
+                                  ),
+                                  child: Text(
+                                    'Buy',
+                                    style: AppTheme.text2.withWhite,
+                                  ),
                                 ),
-                                child: Text(
-                                  'Buy',
-                                  style: AppTheme.text2.withWhite,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
